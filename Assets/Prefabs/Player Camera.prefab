@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 213803896095276697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -80,6 +80,17 @@ MonoBehaviour:
   player: {fileID: 0}
   cameraObj: {fileID: 7549543459619807944}
   cameraPivotTransform: {fileID: 3310377126073359041}
+  horizontalRotateSpeed: 220
+  verticalRotateSpeed: 180
+  minPivot: -30
+  maxPivot: 30
+  cameraCollisionRadius: 0.2
+  collideWithLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  cameraSmoothSpeed: 1
+  horizontalLookAngle: 0
+  verticalLookAngle: 0
 --- !u!1 &4524856227217836853
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 4524856227217836853}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
