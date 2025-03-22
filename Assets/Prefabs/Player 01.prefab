@@ -1753,7 +1753,7 @@ Animator:
   m_GameObject: {fileID: 9184000430817200815}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f12895d5cd74f9b4c82a7a1a11b4c610, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca5e7e43136c7de4a920452e0585771a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1786,6 +1786,7 @@ MonoBehaviour:
   canRotate: 1
   canMove: 1
   isGrounded: 1
+  isMoving: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
 --- !u!114 &-5493660899424947286

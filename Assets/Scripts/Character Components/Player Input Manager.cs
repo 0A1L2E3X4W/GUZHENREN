@@ -22,6 +22,9 @@ public class PlayerInputManager : MonoBehaviour
     [HideInInspector] public float cameraVerticalInput;
     [HideInInspector] public float cameraHorizontalInput;
 
+    [Header("PLAYER ACTION INPUT")]
+    [SerializeField] private bool sprintInput = false;
+
     private void Awake()
     {
         if (Instance == null) { Instance = this; }
@@ -71,6 +74,10 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+            // HOLD ACTION
+            playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+            playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
         }
 
         playerControls.Enable();
@@ -99,6 +106,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleCameraInput();
+
+        HandleSprintInput();
     }
 
     // PLAYER MOVEMENT
@@ -115,8 +124,8 @@ public class PlayerInputManager : MonoBehaviour
         if (player == null)
             return;
 
-        //if (moveAmount != 0f) { player.playerNetworkManager.isMoving.Value = true; }
-        //else { player.playerNetworkManager.isMoving.Value = false; }
+        if (moveAmount != 0f) { player.isMoving = true; }
+        else { player.isMoving = false; }
 
         //if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
         //{
@@ -126,6 +135,8 @@ public class PlayerInputManager : MonoBehaviour
         //{
         //    player.playerAnimatorManager.UpdateAnimatorMovementParams(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
         //}
+
+        player.playerAnimatorManager.UpdateAnimatorMovementParams(0, moveAmount, player.isSprinting);
     }
 
     // CAMERA
@@ -133,5 +144,17 @@ public class PlayerInputManager : MonoBehaviour
     {
         cameraHorizontalInput = cameraInput.x;
         cameraVerticalInput = cameraInput.y;
+    }
+
+    private void HandleSprintInput()
+    {
+        if (sprintInput)
+        {
+            player.playerLocomotionManager.HandleSprinting();
+        }
+        else
+        {
+            player.isSprinting = false;
+        }
     }
 }

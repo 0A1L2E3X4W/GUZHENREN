@@ -85,4 +85,22 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
         transform.rotation = targetRotation;
     }
+
+    // PLAYER ACTIONS
+    public void HandleSprinting()
+    {
+        if (player.isPerformingAction)
+        {
+            player.isSprinting = false;
+        }
+
+        if (moveAmount >= 0.5f)
+        {
+            player.isSprinting = true;
+        }
+        else
+        {
+            player.isSprinting = false;
+        }
+    }
 }

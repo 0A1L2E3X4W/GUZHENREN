@@ -6,6 +6,9 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
 
+    [Header("PLAYER STATUS")]
+    public bool isSprinting = false;
+
     protected override void Awake()
     {
         base.Awake();

@@ -17,6 +17,9 @@ public class CharacterManager : MonoBehaviour
     public bool canMove = true;
     public bool isGrounded = true;
 
+    [Header("STATUS")]
+    public bool isMoving = false;
+
     protected virtual void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -35,7 +38,7 @@ public class CharacterManager : MonoBehaviour
 
     protected virtual void Update()
     {
-        
+        characterAnimatorManager.UpdateAllAnimatorParams();
     }
 
     protected virtual void LateUpdate()
