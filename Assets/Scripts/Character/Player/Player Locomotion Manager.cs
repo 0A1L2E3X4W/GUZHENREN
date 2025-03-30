@@ -16,6 +16,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     private Vector3 moveDirection;
     private Vector3 targetRotateDirection;
 
+    [Header("DODGE SETTINGS")]
+    private Vector3 rollDirection;
+
     protected override void Awake()
     {
         base.Awake();
@@ -101,6 +104,29 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         else
         {
             player.isSprinting = false;
+        }
+    }
+
+    public void AttemptPerformDodge()
+    {
+        if (player.isPerformingAction)
+            return;
+
+        if (PlayerInputManager.Instance.moveAmount > 0)
+        {
+            rollDirection = PlayerCamera.Instance.cameraObj.transform.forward * PlayerInputManager.Instance.verticalInput;
+            rollDirection += PlayerCamera.Instance.cameraObj.transform.right * PlayerInputManager.Instance.horizontalInput;
+            rollDirection.y = 0f;
+            rollDirection.Normalize();
+
+            Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
+            player.transform.rotation = playerRotation;
+
+            player.playerAnimatorManager.PlayTargetActionAnim("Unarmed_Roll_Forward", true, true);
+        }
+        else
+        {
+            player.playerAnimatorManager.PlayTargetActionAnim("Unarmed_Roll_Back", true, true);
         }
     }
 }

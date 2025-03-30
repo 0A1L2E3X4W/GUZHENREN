@@ -46,4 +46,16 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.anim.SetFloat(anim_horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
         character.anim.SetFloat(anim_vertical, snappedVertical, 0.1f, Time.deltaTime);
     }
+
+    // PLAY ACTION ANIM
+    public virtual void PlayTargetActionAnim(string targetAnim,
+        bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
+    {
+        character.applyRootMotion = applyRootMotion;
+        character.anim.CrossFade(targetAnim, 0.2f);
+        character.isPerformingAction = isPerformingAction;
+
+        character.canMove = canMove;
+        character.canRotate = canRotate;
+    }
 }

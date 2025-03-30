@@ -24,6 +24,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("PLAYER ACTION INPUT")]
     [SerializeField] private bool sprintInput = false;
+    [SerializeField] private bool dodgeInput = false;
 
     private void Awake()
     {
@@ -78,6 +79,9 @@ public class PlayerInputManager : MonoBehaviour
             // HOLD ACTION
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+
+            // TAP ACTION
+            playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
         }
 
         playerControls.Enable();
@@ -108,6 +112,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleCameraInput();
 
         HandleSprintInput();
+        HandleDodgeInput();
     }
 
     // PLAYER MOVEMENT
@@ -155,6 +160,16 @@ public class PlayerInputManager : MonoBehaviour
         else
         {
             player.isSprinting = false;
+        }
+    }
+
+    // ACTIONS
+    private void HandleDodgeInput()
+    {
+        if (dodgeInput)
+        {
+            dodgeInput = false;
+            player.playerLocomotionManager.AttemptPerformDodge();
         }
     }
 }
